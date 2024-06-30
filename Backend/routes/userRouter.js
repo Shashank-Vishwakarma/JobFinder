@@ -3,7 +3,7 @@ const User = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
-router.post('/register', jwtAuthMiddleware , async (req, res)=>{
+router.post('/register', async (req, res)=>{
     const { name, email, phone, role, password } = req.body;
 
     if(!name || !email || !phone || !role || !password) {
