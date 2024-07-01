@@ -49,4 +49,20 @@ router.post('/create-a-job', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async(req, res) => {
+    const { _id, role } = req.user;
+    if(role === 'Job Seeker') {
+        return res.status(400).json({ error: "You cannot access all the jobs posted by any other employer." });
+    }
+
+    try {
+        const jobs = await Job.find({ postedBy: _id });
+        res.status(200).json({
+            jobs: jobs
+        });
+    } catch(err) {
+        res.status(500).json({ message: `Internal server error ${err}` });
+    }
+});
+
 module.exports = router;
