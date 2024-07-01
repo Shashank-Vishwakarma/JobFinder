@@ -45,8 +45,8 @@ router.post('/login', async (req, res)=>{
             return res.status(400).json({ error: 'email and password are required' });
         }
 
-        const user = await User.findOne({ email: email });
         // check if user exists or not
+        const user = await User.findOne({ email: email });
         if(!user) {
             return res.status(400).json({ error: "User does not exist. Please create a new account." });
         }
@@ -56,6 +56,7 @@ router.post('/login', async (req, res)=>{
         if(!isPasswordMatch) {
             return res.status(400).json({ error: "Password does not match. Please try again!" });
         }
+
         const payload = {
             id: user.id
         };
