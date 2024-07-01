@@ -20,6 +20,19 @@ router.post('/create-a-job', jwtAuthMiddleware, async (req, res) => {
         return res.status(400).json({ message: "You cannot post a job." });
     }
 
+    const { title, description, category, country, city, location, fixedSalary, salaryFrom, salaryTo } = req.body;
+    if (!title || !description || !category || !country || !city || !location) {
+        return res.status(400).json({ message: "Please provide details for the required fields." });
+    }
+
+    if ((!salaryFrom || !salaryTo) && !fixedSalary) {
+        return res.status(400).json({ message: "Please either provide fixed salary or ranged salary." });
+    }
+
+    if (salaryFrom && salaryTo && fixedSalary) {
+        return res.status(400).json({ message: "Cannot Enter Fixed and Ranged Salary together." });
+    }
+
     try {
         // create the job
         const job = new Job({
