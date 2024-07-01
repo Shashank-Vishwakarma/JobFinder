@@ -49,9 +49,9 @@ router.post('/create-a-job', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
-router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async(req, res) => {
+router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async (req, res) => {
     const { _id, role } = req.user;
-    if(role === 'Job Seeker') {
+    if (role === 'Job Seeker') {
         return res.status(400).json({ error: "You cannot access all the jobs posted by any other employer." });
     }
 
@@ -60,7 +60,35 @@ router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async(req, res) => {
         res.status(200).json({
             jobs: jobs
         });
-    } catch(err) {
+    } catch (err) {
+        res.status(500).json({ message: `Internal server error ${err}` });
+    }
+});
+
+router.put('/update/:job_id', jwtAuthMiddleware, async (req, res) => {
+    const { role } = req.user;
+    if (role === 'Job Seeker') {
+        return res.status(400).json({ error: "You do not have the access to update any job." });
+    }
+
+    // check if the job exists
+    const job_id = req.params.job_id;
+    let jobToUpdate = await Job.findById(job_id);
+    if (!jobToUpdate) {
+        return res.status(404).json({ error: "oops! Job not found." });
+    }
+
+    try {
+        // update the job
+        jobToUpdate = await Job.findByIdAndUpdate(job_id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({
+            message: "Job updated successfully!"
+        });
+    } catch (err) {
         res.status(500).json({ message: `Internal server error ${err}` });
     }
 });
