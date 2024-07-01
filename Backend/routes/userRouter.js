@@ -40,9 +40,9 @@ router.post('/register', async (req, res)=>{
 
 router.post('/login', async (req, res)=>{
     try {
-        const { email, password } = req.body;
-        if(!email || !password) {
-            return res.status(400).json({ error: 'email and password are required' });
+        const { email, password, role } = req.body;
+        if(!email || !password || !role) {
+            return res.status(400).json({ error: 'All fields are required' });
         }
 
         // check if user exists or not
@@ -57,11 +57,17 @@ router.post('/login', async (req, res)=>{
             return res.status(400).json({ error: "Password does not match. Please try again!" });
         }
 
+        // check for role
+        if(user.role !== role) {
+            return res.status(400).json({ error: `User does not have the role - ${role}` });
+        }
+
         const payload = {
             id: user.id
         };
         const token = generateJWT(payload);
         res.status(200).json({
+            message: "User logged in successfully!",
             token: token
         });
     } catch(err) {
