@@ -53,7 +53,7 @@ const jobSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-});
+}, { collection: 'Job' });
 
 const Job = mongoose.model('Job', jobSchema);
 module.exports = Job;
