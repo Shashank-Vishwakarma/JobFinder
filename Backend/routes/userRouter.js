@@ -77,6 +77,7 @@ router.post('/login', async (req, res)=>{
               Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
             ),
             httpOnly: true, // Set httpOnly to true
+            sameSite: 'None'
         };
         res.status(200).cookie('token', token, cookieOptions).json({
             message: "User logged in successfully!",
