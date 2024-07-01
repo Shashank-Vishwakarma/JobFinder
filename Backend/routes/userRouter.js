@@ -28,7 +28,13 @@ router.post('/register', async (req, res)=>{
         };
 
         const token = generateJWT(payload);
-        res.status(200).json({
+        const cookieOptions = {
+            expires: new Date(
+              Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+            ),
+            httpOnly: true, // Set httpOnly to true
+        };
+        res.status(200).cookie('token', token, cookieOptions).json({
             message: "User registered successfully",
             response: response,
             token: token
@@ -66,13 +72,32 @@ router.post('/login', async (req, res)=>{
             id: user.id
         };
         const token = generateJWT(payload);
-        res.status(200).json({
+        const cookieOptions = {
+            expires: new Date(
+              Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+            ),
+            httpOnly: true, // Set httpOnly to true
+        };
+        res.status(200).cookie('token', token, cookieOptions).json({
             message: "User logged in successfully!",
             token: token
         });
     } catch(err) {
         res.status(500).json({ error: `Internal server error : ${err}` });
     }
+});
+
+router.get('/logout', jwtAuthMiddleware, (req, res)=>{
+    const cookieOptions = {
+        expires: new Date(
+          Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+        ),
+        httpOnly: true, // Set httpOnly to true
+    };
+    res.clearCookie('token', cookieOptions);
+    res.status(200).json({
+        message: "User logged out successfully!"
+    });
 });
 
 module.exports = router;
