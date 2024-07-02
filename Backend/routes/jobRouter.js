@@ -93,4 +93,28 @@ router.put('/update/:job_id', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+router.delete('/delete/:job_id', jwtAuthMiddleware, async (req, res) => {
+    const { role } = req.user;
+    if (role === 'Job Seeker') {
+        return res.status(400).json({ error: "You do not have the access to delete any job." });
+    }
+
+    // check if job exists
+    const { job_id } = req.params;
+    let jobToDelete = await Job.findById(job_id);
+    if (!jobToDelete) {
+        return res.status(404).json({ error: `oops! Job not found. ${jobToDelete}` });
+    }
+
+    try {
+        // delete the job
+        jobToDelete = await Job.findByIdAndDelete(job_id);
+        res.status(200).json({
+            message: "Job deleted successfully!"
+        });
+    } catch (err) {
+        res.status(500).json({ message: `Internal server error ${err}` });
+    }
+});
+
 module.exports = router;
