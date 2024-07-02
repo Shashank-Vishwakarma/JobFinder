@@ -3,6 +3,7 @@ const Job = require('../models/job');
 const { jwtAuthMiddleware } = require('../auth/jwt');
 const router = express.Router();
 
+// get all the jobs for job seeker
 router.get('/get-all-jobs', jwtAuthMiddleware, async (req, res) => {
     try {
         const allJobs = await Job.find({ expired: false });
@@ -14,6 +15,7 @@ router.get('/get-all-jobs', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+// create a job by employer
 router.post('/create-a-job', jwtAuthMiddleware, async (req, res) => {
     const { _id, role } = req.user;
     if (role !== 'Employer') {
@@ -49,6 +51,7 @@ router.post('/create-a-job', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+// get all the jobs posted by employer
 router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async (req, res) => {
     const { _id, role } = req.user;
     if (role === 'Job Seeker') {
@@ -65,6 +68,7 @@ router.get('/get-employer-posted-jobs', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+// update a job
 router.put('/update/:job_id', jwtAuthMiddleware, async (req, res) => {
     const { role } = req.user;
     if (role === 'Job Seeker') {
@@ -93,6 +97,7 @@ router.put('/update/:job_id', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+// delete a job
 router.delete('/delete/:job_id', jwtAuthMiddleware, async (req, res) => {
     const { role } = req.user;
     if (role === 'Job Seeker') {
