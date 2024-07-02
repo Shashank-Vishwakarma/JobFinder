@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config({ path: './config/.env' });
 
-const MongodbUrl = process.env.MONGODB_URL;
+const MongodbUrl = process.env.MONGODB_CLOUD_URL;
 mongoose.connect(MongodbUrl, {
         dbName: 'Job_finder'
     }
