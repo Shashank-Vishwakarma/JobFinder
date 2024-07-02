@@ -101,4 +101,8 @@ router.get('/logout', jwtAuthMiddleware, (req, res)=>{
     });
 });
 
+router.get('/profile', jwtAuthMiddleware, (req, res)=>{
+    res.status(200).json({ user: req.user });
+});
+
 module.exports = router;
