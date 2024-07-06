@@ -31,8 +31,8 @@ function Login() {
                                         </div>
 
                                         <form className="flex flex-col justify-center items-center">
-                                            <p className="mb-4">Please login to your account</p>
-                                            <div className="flex flex-row flex-1">
+                                            <p className="mb-4 font-bold">Please login to your account</p>
+                                            <div className="flex flex-row flex-1 mb-1">
                                                 <label>Login As :</label>
                                                 <div className="text-black mx-2">
                                                     <select
@@ -64,7 +64,7 @@ function Login() {
                                             ></Input>
 
                                             {/* <!--Log In button--> */}
-                                            <div className="mb-12 pb-1 pt-1 text-center">
+                                            <div className="mb-6 pb-1 pt-1 text-center">
                                                 <button
                                                     className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                                                     type="button"
@@ -79,7 +79,7 @@ function Login() {
                                             </div>
 
                                             {/* <!--Register button--> */}
-                                            <div className="flex items-center justify-between pb-6">
+                                            <div className="flex items-center justify-between pb-6 w-72">
                                                 <p className="mb-0 mr-2">Don't have an account?</p>
                                                 <Link to={'/register'}>
                                                     <button

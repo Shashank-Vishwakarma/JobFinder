@@ -15,14 +15,14 @@ function Register() {
 
     return (
         <section className="h-full bg-neutral-200">
-            <div className="container h-full p-10">
+            <div className="container h-full p-5">
                 <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-                    <div className="w-full">
+                    <div className="w-3/4">
                         <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
                             <div className="g-0 lg:flex lg:flex-wrap">
                                 {/* <!-- Left column container--> */}
                                 <div className="px-4 md:px-0 lg:w-6/12">
-                                    <div className="md:mx-6 md:p-12">
+                                    <div className="md:mx-6 md:p-4">
                                         {/* <!--Logo--> */}
                                         <div className="text-center">
                                             <img
@@ -36,7 +36,7 @@ function Register() {
                                         </div>
 
                                         <form className="flex flex-col justify-center items-center">
-                                            <p className="mb-4">Please create a new Account!</p>
+                                            <p className="mb-4 font-bold">Please create a new account</p>
                                             <div className="flex flex-row flex-1">
                                                 <label>Register As :</label>
                                                 <div className="text-black mx-2">
@@ -88,7 +88,7 @@ function Register() {
                                             ></Input>
 
                                             {/* <!--Register button--> */}
-                                            <div className="mb-12 pb-1 pt-1 text-center">
+                                            <div className="mb-6 pb-1 pt-1 text-center">
                                                 <button
                                                     className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                                                     type="button"
