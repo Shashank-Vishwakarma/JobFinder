@@ -57,6 +57,7 @@ function Register() {
                                                 id="name"
                                                 name="name"
                                                 label="Name"
+                                                value={name}
                                                 onChange={(e) => setName(e.target.value)}
                                             ></Input>
 
@@ -66,6 +67,7 @@ function Register() {
                                                 id="email"
                                                 name="email"
                                                 label="Email"
+                                                value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                             ></Input>
 
@@ -75,6 +77,7 @@ function Register() {
                                                 id="phone"
                                                 name="phone"
                                                 label="Phone"
+                                                value={phone}
                                                 onChange={(e) => setPhone(e.target.value)}
                                             ></Input>
 
@@ -84,6 +87,7 @@ function Register() {
                                                 id="password"
                                                 name="password"
                                                 label="Password"
+                                                value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                             ></Input>
 
