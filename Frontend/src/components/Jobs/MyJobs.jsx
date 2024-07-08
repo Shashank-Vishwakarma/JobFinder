@@ -3,7 +3,9 @@ import React from "react";
 function MyJobs() {
     return (
         <>
-            My Jobs
+            <div>
+                
+            </div>
         </>
     );
 }

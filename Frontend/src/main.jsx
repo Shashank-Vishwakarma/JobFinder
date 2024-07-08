@@ -10,6 +10,8 @@ import MyJobs from './components/Jobs/MyJobs.jsx';
 import JobDetails from './components/Jobs/jobDetails.jsx';
 import Application from './components/Application/Application.jsx';
 import PostJob from "./components/Jobs/PostJob";
+import NotFound from './components/utils/NotFound.jsx'
+import MyApplications from './components/Application/MyApplications.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,10 +19,12 @@ const router = createBrowserRouter(
       <Route path='login' element={ <Login/> }/>
       <Route path='register' element={ <Register/> }/>
       <Route path='job/all' element={ <AllJobs/> }/>
-      <Route path='applications/me' element={ <MyJobs/> }/>
       <Route path='job/:id' element={ <JobDetails/> }/>
-      <Route path="/application/:id" element={<Application />} />
-      <Route path="/job/post" element={<PostJob />} />
+      <Route path="job/post" element={<PostJob />} />
+      <Route path="job/me" element={<MyJobs />} />
+      <Route path="application/:id" element={<Application />} />
+      <Route path='applications/me' element={ <MyApplications/> }/>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
