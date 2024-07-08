@@ -26,7 +26,7 @@ function AllJobs() {
 
     return (
         <div className="w-full h-40 p-4">
-            <h1 className="text-center font-bold text-3xl mb-2">Available Jobs</h1>
+            <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Available Jobs</h1>
             <div className="grid grid-cols-3 gap-6">
                 {
                     jobs && jobs.map((element) => (

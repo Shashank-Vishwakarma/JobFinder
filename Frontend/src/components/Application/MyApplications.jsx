@@ -7,7 +7,39 @@ import ResumeModal from "./ResumeModal";
 function MyApplications() {
     const { isAuthorized, user } = useContext(AppContext);
     const [applications, setApplications] = useState([
-        
+        {
+            _id: 1,
+            name: "Shashank Vishwakarma",
+            email: "shashank@gmail.com",
+            phone: 1234567,
+            coverLetter: "This is cover letter",
+            address: "bangalore, India",
+            resume: {
+                url: "image.png"
+            }
+        },
+        {
+            _id: 2,
+            name: "Yash Mishra",
+            email: "yash@gmail.com",
+            phone: 1234567,
+            coverLetter: "This is cover letter",
+            address: "bangalore, India",
+            resume: {
+                url: "image.png"
+            }
+        },
+        {
+            _id: 3,
+            name: "Prasoon Pathak",
+            email: "prasoon@gmail.com",
+            phone: 1234567,
+            coverLetter: "This is cover letter",
+            address: "bangalore, India",
+            resume: {
+                url: "image.png"
+            }
+        }
     ]);
     const [modalOpen, setModalOpen] = useState(false);
     const [resumeImageUrl, setResumeImageUrl] = useState("");
@@ -30,7 +62,7 @@ function MyApplications() {
         <section className="">
             {user && user.role === "Job Seeker" ? (
                 <div className="p-4">
-                    <h1 className="text-2xl font-bold text-center mb-4 bg-sky-200 p-2 rounded-md">My Applications</h1>
+                    <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">My Applications</h1>
                     <div className="grid grid-cols-3 gap-4">
                         {applications.length <= 0 ? (
                             <>
@@ -53,7 +85,7 @@ function MyApplications() {
                 </div>
             ) : (
                 <div className="p-4">
-                    <h1 className="text-2xl font-bold text-center mb-4 bg-sky-200 p-2 rounded-md">Applications From Job Seekers</h1>
+                    <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Applications Received</h1>
                     <div className="grid grid-cols-3 gap-4">
                         {applications.length <= 0 ? (
                             <>
@@ -84,23 +116,23 @@ function MyApplications() {
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
     return (
         <>
-            <div className="bg-slate-200 p-2 flex flex-row items-center shadow-md rounded-md">
+            <div className="bg-slate-300 p-2 flex flex-row items-center shadow-md rounded-md">
                 <div className="flex flex-row justify-center items-center">
                     <div>
                         <p>
-                            <span>Name:</span> {element.name}
+                            <span><b>Name: </b></span> {element.name}
                         </p>
                         <p>
-                            <span>Email:</span> {element.email}
+                            <span><b>Email: </b></span> {element.email}
                         </p>
                         <p>
-                            <span>Phone:</span> {element.phone}
+                            <span><b>Phone: </b></span> {element.phone}
                         </p>
                         <p>
-                            <span>Address:</span> {element.address}
+                            <span><b>Address: </b></span> {element.address}
                         </p>
                         <p>
-                            <span>CoverLetter:</span> {element.coverLetter}
+                            <span><b>CoverLetter: </b></span> {element.coverLetter}
                         </p>
                         <div className="p-2 bg-red-500 rounded-md font-bold text-white mt-2">
                             <button onClick={() => deleteApplication(element._id)}>
@@ -124,22 +156,22 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 const EmployerCard = ({ element, openModal }) => {
     return (
         <>
-            <div className="bg-slate-200 p-2 flex flex-row items-center shadow-md rounded-md">
+            <div className="bg-slate-300 p-2 flex flex-row items-center shadow-md rounded-md">
                 <div>
                     <p>
-                        <span>Name: </span> {element.name}
+                        <span><b>Name: </b></span> {element.name}
                     </p>
                     <p>
-                        <span>Email: </span> {element.email}
+                        <span><b>Email: </b></span> {element.email}
                     </p>
                     <p>
-                        <span>Phone: </span> {element.phone}
+                        <span><b>Phone: </b></span> {element.phone}
                     </p>
                     <p>
-                        <span>Address: </span> {element.address}
+                        <span><b>Address: </b></span> {element.address}
                     </p>
                     <p>
-                        <span>CoverLetter: </span> {element.coverLetter}
+                        <span><b>CoverLetter: </b></span> {element.coverLetter}
                     </p>
                 </div>
                 <div className="w-24">
@@ -155,38 +187,3 @@ const EmployerCard = ({ element, openModal }) => {
 }
 
 export default MyApplications;
-
-// -- dummy data --
-// {
-//     _id: 1,
-//     name: "Shashank Vishwakarma",
-//     email: "shashank@gmail.com",
-//     phone: 1234567,
-//     coverLetter: "This is cover letter",
-//     address: "bangalore, India",
-//     resume: {
-//         url: "image.png"
-//     }
-// },
-// {
-//     _id: 2,
-//     name: "Yash Mishra",
-//     email: "yash@gmail.com",
-//     phone: 1234567,
-//     coverLetter: "This is cover letter",
-//     address: "bangalore, India",
-//     resume: {
-//         url: "image.png"
-//     }
-// },
-// {
-//     _id: 3,
-//     name: "Prasoon Pathak",
-//     email: "prasoon@gmail.com",
-//     phone: 1234567,
-//     coverLetter: "This is cover letter",
-//     address: "bangalore, India",
-//     resume: {
-//         url: "image.png"
-//     }
-// }

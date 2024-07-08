@@ -19,7 +19,7 @@ function JobDetails() {
     return (
         <section className="w-1/2 h-full bg-slate-100 p-4 text-left m-2">
             <div className="w-full p-2">
-                <h1 className="text-2xl font-bold text-center mb-4">Job Details</h1>
+                <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Job Details</h1>
                 <div>
                     <p>
                         <b>Title: </b><span> {job.title}</span>
