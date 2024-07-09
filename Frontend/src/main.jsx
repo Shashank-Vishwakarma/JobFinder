@@ -12,10 +12,12 @@ import Application from './components/Application/Application.jsx';
 import PostJob from "./components/Jobs/PostJob";
 import NotFound from './components/utils/NotFound.jsx'
 import MyApplications from './components/Application/MyApplications.jsx';
+import Home from './components/Home/Home.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={ <App/> }>
+      <Route path='' element={<Home/>}/>
       <Route path='login' element={ <Login/> }/>
       <Route path='register' element={ <Register/> }/>
       <Route path='job/all' element={ <AllJobs/> }/>
