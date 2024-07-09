@@ -124,7 +124,7 @@ function PostJob() {
                         className="p-2 m-1 border-2 border-solid border-cyan-700 outline-none text-black rounded-md block"
                     />
                     <button type="submit" className="w-40 h-10 bg-sky-500 rounded-md shadow-md font-bold text-white mt-4">
-                        Create Job
+                        Post Job
                     </button>
                 </form>
             </div>

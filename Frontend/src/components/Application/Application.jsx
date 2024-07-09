@@ -20,9 +20,9 @@ function Application() {
     return (
         <>
             <h1 className="text-2xl font-bold text-center m-4 bg-sky-400 p-2 rounded-md">Application Form</h1>
-            <section className="bg-slate-300 flex items-center justify-center m-4 p-2 rounded-md">
-                <div className="">
-                    <form className="flex flex-col gap-3">
+            <section className="flex items-center justify-center m-4 p-2 rounded-md">
+                <div className="bg-slate-300 shadow-md rounded-md p-4">
+                    <form className="grid grid-cols-2 gap-3">
                         <Input
                             type="text"
                             name="name"
