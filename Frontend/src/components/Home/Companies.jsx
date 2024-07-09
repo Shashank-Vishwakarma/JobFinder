@@ -5,17 +5,17 @@ function Companies() {
         {
             id: 1,
             title: "Microsoft",
-            //   icon: <FaMicrosoft />,
+            icon: "https://img.icons8.com/color/48/microsoft.png",
         },
         {
             id: 2,
             title: "Tesla",
-            //   icon: <SiTesla />,
+            icon: "https://img.icons8.com/color/48/tesla-logo.png",
         },
         {
             id: 3,
             title: "Apple",
-            //   icon: <FaApple />,
+            icon: "https://img.icons8.com/ios-filled/50/mac-os.png",
         },
     ];
     return (
@@ -25,7 +25,7 @@ function Companies() {
                 {companies.map((element) => {
                     return (
                         <div key={element.id} className="flex flex-row justify-center items-center flex-1">
-                            {/* <div className="icon">{element.icon}</div> */}
+                            <img src={element.icon} alt="Company Logo" />
                             <div className="text-xl font-bold">
                                 <p>{element.title}</p>
                             </div>

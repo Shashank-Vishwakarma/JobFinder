@@ -16,7 +16,7 @@ function PostJob() {
         <>
         <h1 className="text-2xl font-bold text-center m-4 bg-sky-400 p-2 rounded-md">POST NEW JOB</h1>
             <div className="flex flex-1 flex-row p-6 justify-center items-center">
-                <form className="bg-slate-200 rounded-md p-2">
+                <form className="bg-slate-300 rounded-md p-2">
                     <div>
                         <Input
                             type="text"
