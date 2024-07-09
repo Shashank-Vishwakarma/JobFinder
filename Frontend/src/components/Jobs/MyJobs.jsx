@@ -40,15 +40,15 @@ function MyJobs() {
 
     return (
             <div className="p-2">
-                <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Your Posted Jobs</h1>
+                <h1 className="text-2xl font-bold text-center m-4 bg-sky-400 p-2 rounded-md">Your Posted Jobs</h1>
                 <div>
                     {myJobs.length > 0 ? (
                         <>
                             <div className="m-2">
                                 {myJobs.map((element) => (
                                     <div className="p-2 m-2 bg-slate-300 rounded-md shadow-lg" key={element._id}>
-                                        <div className="">
-                                            <div className="">
+                                        <div>
+                                            <div>
                                                 <div className="inline-block m-2">
                                                     <span><b>Title: </b></span>
                                                     <input
@@ -230,6 +230,8 @@ function MyJobs() {
                                                 <div className="m-2">
                                                     <span><b>Description: </b></span>{" "}
                                                     <textarea
+                                                        rows="10"
+                                                        cols="100"
                                                         value={element.description}
                                                         disabled={
                                                             editingMode !== element._id ? true : false

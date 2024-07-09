@@ -7,7 +7,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-    const [phone, setPhone] = useState(0);
+    const [phone, setPhone] = useState('');
 
     const handleRegister = () => {
         console.log(name, role, email, password, phone);

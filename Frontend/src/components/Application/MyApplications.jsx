@@ -59,7 +59,7 @@ function MyApplications() {
     }
 
     return (
-        <section className="">
+        <section>
             {user && user.role === "Job Seeker" ? (
                 <div className="p-4">
                     <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">My Applications</h1>

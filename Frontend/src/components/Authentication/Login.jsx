@@ -33,11 +33,12 @@ function Login() {
                                         <form className="flex flex-col justify-center items-center">
                                             <p className="mb-4 font-bold">Please login to your account</p>
                                             <div className="flex flex-row flex-1 mb-1">
-                                                <label>Login As :</label>
+                                                <label>Login As : </label>
                                                 <div className="text-black mx-2">
                                                     <select
                                                         value={role}
                                                         onChange={(e) => setRole(e.target.value)}
+                                                        className=""
                                                     >
                                                         <option value="Select Role">Select Role</option>
                                                         <option value="Employer">Employer</option>

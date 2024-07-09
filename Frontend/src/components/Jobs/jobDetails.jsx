@@ -17,9 +17,9 @@ function JobDetails() {
     const { isAuthorized, user } = useContext(AppContext);
 
     return (
-        <section className="w-1/2 h-full bg-slate-100 p-4 text-left m-2">
-            <div className="w-full p-2">
-                <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Job Details</h1>
+        <section className="p-4 text-left m-2">
+            <h1 className="text-2xl font-bold text-center mb-4 bg-sky-400 p-2 rounded-md">Job Details</h1>
+            <div className="w-full p-2 flex flex-row flex-1 justify-around items-center">
                 <div>
                     <p>
                         <b>Title: </b><span> {job.title}</span>
@@ -53,15 +53,17 @@ function JobDetails() {
                         )}
                     </p>
                 </div>
+                <div>
                 {user && user.role === "Employer" ? (
                     <></>
                 ) : (
-                    <Link to={`/application/${job._id}`} className="bg-cyan-400 shadow-md rounded-md p-1 mt-2">
-                        <button className="mt-4 font-bold">
+                    <Link to={`/application/${job._id}`}>
+                        <button className="mt-4 font-bold w-40 p-2 bg-cyan-400 shadow-md rounded-md">
                             Apply Now
                         </button>
                     </Link>
                 )}
+                </div>
             </div>
         </section>
     );

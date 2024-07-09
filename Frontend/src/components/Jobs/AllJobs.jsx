@@ -34,8 +34,8 @@ function AllJobs() {
                             <p><b>Title: </b>{element.title}</p>
                             <p><b>Category: </b>{element.category}</p>
                             <p><b>Location: </b>{element.location}</p>
-                            <Link to={`/job/${element._id}`} className="text-white">
-                                <button className="bg-amber-800 p-1 rounded-sm mt-2">
+                            <Link to={`/job/${element._id}`}>
+                                <button className="bg-amber-800 p-1 rounded-md shadow-md w-32 mt-2 text-white font-bold">
                                     Job Details
                                 </button>
                             </Link>

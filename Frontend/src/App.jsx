@@ -26,9 +26,9 @@ function App() {
 
   return (
     <AppContext.Provider value={{ isAuthorized, setIsAuthorized, user, setUser }}>
-      {/* <Header/> */}
+      <Header/>
       <Outlet/>
-      {/* <Footer/> */}
+      <Footer/>
     </AppContext.Provider>
   )
 }
