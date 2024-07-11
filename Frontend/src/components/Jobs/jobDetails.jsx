@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function JobDetails() {
     const [job, setJob] = useState({
@@ -15,6 +15,7 @@ function JobDetails() {
         fixedSalary: 20000
     });
     const { isAuthorized, user } = useContext(AppContext);
+    const navigateTo = useNavigate();
 
     return (
         <section className="p-4 text-left m-2">
@@ -54,15 +55,19 @@ function JobDetails() {
                     </p>
                 </div>
                 <div>
-                {user && user.role === "Employer" ? (
-                    <></>
-                ) : (
-                    <Link to={`/application/${job._id}`}>
-                        <button className="mt-4 font-bold w-40 p-2 bg-cyan-400 shadow-md rounded-md">
-                            Apply Now
-                        </button>
-                    </Link>
-                )}
+                    {
+                        user && user.role === "Employer" ? (
+                            <></>
+                        ) : (
+                            <Link 
+                                onClick={ isAuthorized? navigateTo(`/application/${job._id}`): navigateTo('/register') }
+                            >
+                                <button className="mt-4 font-bold w-40 p-2 bg-cyan-400 shadow-md rounded-md">
+                                    Apply Now
+                                </button>
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </section>

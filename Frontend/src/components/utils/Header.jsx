@@ -16,19 +16,27 @@ function Header() {
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         {/* Logo */}
                         <Link to={'/'} className="flex items-center">
-                            <img width="64" height="64" src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-Job-Search-recruitment-nawicon-outline-color-nawicon.png" alt="Job Finder"/>
+                            <img width="64" height="64" src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-Job-Search-recruitment-nawicon-outline-color-nawicon.png" alt="Job Finder" />
                             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Job Finder</span>
                         </Link>
                         <div className="flex items-center lg:order-2">
-                            {/* Log in button */}
-                            <Link to={'/login'} className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                                LOG IN
-                            </Link>
+                            {
+                                isAuthorized ? (
+                                    <></>
+                                ) : (
+                                    <>
+                                        {/* Log in button */}
+                                        <Link to={'/login'} className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                                            LOG IN
+                                        </Link>
 
-                            {/* get started */}
-                            <Link to={'/register'} className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                                GET STARTED
-                            </Link>
+                                        {/* get started */}
+                                        <Link to={'/register'} className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                                            REGISTER
+                                        </Link>
+                                    </>
+                                )
+                            }
 
                             <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
@@ -48,35 +56,49 @@ function Header() {
                                         ALL JOBS
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to={'/applications/me'} className="m-2 block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                        {
-                                            user && user.role === 'Employer' ? "APPLICANT'S APPLICATIONS" : "MY APPLICATIONS"
-                                        }
-                                    </Link>
-                                </li>
-                                <ul>
-                                    {
-                                        user && user.role === 'Employer' ? (
-                                            <>
-                                                <li className="inline-block m-2">
-                                                    <Link to={'/job/post'} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                                        POST NEW JOB
-                                                    </Link>
-                                                </li>
-                                                <li className="inline-block m-2">
-                                                    <Link to={'/job/me'} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                                        VIEW YOUR JOBS
-                                                    </Link>
-                                                </li>
-                                            </>
-                                        ) : (<></>)
-                                    }
-                                </ul>
+
+                                {/* rendering of employer's or job seekers pages */}
+                                {
+                                    isAuthorized ? (
+                                        <>
+                                            <li>
+                                                <Link to={'/applications/me'} className="m-2 block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                                    {
+                                                        user && user.role === 'Employer' ? "APPLICANT'S APPLICATIONS" : "MY APPLICATIONS"
+                                                    }
+                                                </Link>
+                                            </li>
+                                            <ul>
+                                                {
+                                                    user && user.role === 'Employer' ? (
+                                                        <>
+                                                            <li className="inline-block m-2">
+                                                                <Link to={'/job/post'} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                                                    POST NEW JOB
+                                                                </Link>
+                                                            </li>
+                                                            <li className="inline-block m-2">
+                                                                <Link to={'/job/me'} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                                                    VIEW YOUR JOBS
+                                                                </Link>
+                                                            </li>
+                                                        </>
+                                                    ) : (<></>)
+                                                }
+                                            </ul>
+                                        </>
+                                    ) : <></>
+                                }
+
                                 <Link to={'/'}>
-                                    <button className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                                        LOGOUT
-                                    </button>
+                                    {
+                                        isAuthorized ? (
+                                            <button className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                                                LOGOUT
+                                            </button>
+                                        ) : <></>
+                                    }
+
                                 </Link>
                             </ul>
                         </div>
