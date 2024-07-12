@@ -3,14 +3,15 @@ const User = require('../models/user');
 
 const jwtAuthMiddleware = async (req, res, next) => {
     // extract the token from cookies
-    const {token} = req.cookies;
-    if(!token) {
+    console.log(req.cookies);
+    const {jwt_token} = req.cookies;
+    if(!jwt_token) {
         return res.status(401).json({ error: 'Unauthorized, token not found' });
     }
 
     try {
         // verification of token
-        const decodedPayload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const decodedPayload = jwt.verify(jwt_token, process.env.JWT_SECRET_KEY);
         req.user = await User.findById(decodedPayload.id);
         next();
     } catch(err) {
