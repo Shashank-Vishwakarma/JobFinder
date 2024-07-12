@@ -1,9 +1,32 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
+import axios from "axios";
 
 function Header() {
     const { isAuthorized, setIsAuthorized, user } = useContext(AppContext);
+
+    const handleLogout = async (e)=>{
+        e.preventDefault();
+
+        try {
+            const response = await axios.get(
+                'http://127.0.0.1:3000/api/v1/user/logout',
+                {
+                    withCredentials: true
+                }
+            );
+
+            setIsAuthorized(false);
+        } catch(err) {
+            setIsAuthorized(true);
+            console.log("error in logging out : ", err);
+        }
+    }
+
+    if(!isAuthorized) {
+        return <Navigate to={'/login'} />
+    }
 
     return (
         <>
@@ -86,7 +109,7 @@ function Header() {
                                     ) : <></>
                                 }
 
-                                <Link to={'/'}>
+                                <Link onClick={handleLogout}>
                                     {
                                         isAuthorized ? (
                                             <button className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
