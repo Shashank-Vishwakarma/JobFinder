@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { AppContext } from "../../context/AppContext";
 
 function AllJobs() {
     const [jobs, setJobs] = useState([]);
+    const { isAuthorized } = useContext(AppContext);
 
     // load all jobs on startup
     useEffect(() => {
@@ -24,6 +26,10 @@ function AllJobs() {
 
         fetchJobs();
     }, []);
+
+    if(!isAuthorized) {
+        return <h1 className="text-2xl font-bold text-center mt-6">Please login to see all jobs.</h1>
+    }
 
     return (
         <div className="w-full h-40 p-4">
