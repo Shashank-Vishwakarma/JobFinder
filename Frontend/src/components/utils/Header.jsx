@@ -1,31 +1,27 @@
 import React, { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 
 function Header() {
-    const { isAuthorized, setIsAuthorized, user } = useContext(AppContext);
+    const { isAuthorized, setIsAuthorized, user, setUser } = useContext(AppContext);
+    const navigateTo = useNavigate();
 
-    const handleLogout = async (e)=>{
+    const handleLogout = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.get(
-                'http://127.0.0.1:3000/api/v1/user/logout',
-                {
-                    withCredentials: true
-                }
-            );
-
+        axios.get(
+            'http://127.0.0.1:3000/api/v1/user/logout',
+            {
+                withCredentials: true
+            }
+        ).then(() => {
             setIsAuthorized(false);
-        } catch(err) {
-            setIsAuthorized(true);
-            console.log("error in logging out : ", err);
-        }
-    }
-
-    if(!isAuthorized) {
-        return <Navigate to={'/login'} />
+            setUser({});
+            navigateTo('/login');
+        }).catch((err) => {
+            console.log("error logging out : ", err);
+        });
     }
 
     return (
@@ -120,7 +116,7 @@ function Header() {
                                 </Link>
 
                                 <li>
-                                    <h3 className="text-white text-lg font-bold mt-2">{user ? user.email : ''}</h3>
+                                    <h3 className="text-white text-lg font-bold mt-2">{user.email ? user.email : ''}</h3>
                                 </li>
                             </ul>
                         </div>
