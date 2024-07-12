@@ -122,4 +122,21 @@ router.delete('/delete/:job_id', jwtAuthMiddleware, async (req, res) => {
     }
 });
 
+// get single job
+router.get('/:job_id', async (req, res)=>{
+    const { job_id } = req.params;
+    try {
+        const job = await Job.findById(job_id);
+        if(!job) {
+            return res.status(404).json({ message: "Couldn't find the job" });
+        }
+
+        res.status(200).json({
+            job: job
+        });
+    } catch(err) {
+        return res.status(404).json({ message: "Invalid ID" });
+    }
+});
+
 module.exports = router;
