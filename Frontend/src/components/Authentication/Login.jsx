@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../utils/Input";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { AppContext } from "../../context/AppContext";
+import axios from 'axios';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
-    const handleLogin = () => {
-        console.log(email, password, role);
+    const { isAuthorized, setIsAuthorized, user, setUser } = useContext(AppContext);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                'http://127.0.0.1:3000/api/v1/user/login',
+                { email, role, password },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            );
+
+            setIsAuthorized(true);
+            setUser(response.data.response);
+        } catch (err) {
+            setIsAuthorized(false);
+            console.log("error in logging in : ", err);
+        }
+    }
+
+    if (isAuthorized) {
+        return <Navigate to={'/'} />
     }
 
     return (
@@ -23,7 +50,7 @@ function Login() {
                                     <div className="md:mx-6 md:p-12">
                                         {/* <!--Logo--> */}
                                         <div className="flex flex-col justify-center items-center">
-                                        <img width="128" height="128" src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-Job-Search-recruitment-nawicon-outline-color-nawicon.png" alt="Job Finder" />
+                                            <img width="128" height="128" src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-Job-Search-recruitment-nawicon-outline-color-nawicon.png" alt="Job Finder" />
                                         </div>
 
                                         <form className="flex flex-col justify-center items-center">
