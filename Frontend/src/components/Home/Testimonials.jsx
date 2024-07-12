@@ -39,7 +39,7 @@ function Testimonials() {
             <div className="grid grid-cols-3 gap-4">
                 {
                     testimonials.map((testimonial) => (
-                        <div className="border-4 border-red-400 p-4 bg-slate-200 flex flex-col justify-center items-center">
+                        <div key={testimonial.id} className="border-4 border-red-400 p-4 bg-slate-200 flex flex-col justify-center items-center">
                             <p>"{testimonial.testimonial}"</p>
                             <p><b>{testimonial.user}</b></p>
                         </div>

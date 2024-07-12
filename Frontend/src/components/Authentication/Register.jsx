@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Input from "../utils/Input";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useContext } from "react";
+import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 function Register() {
     const [name, setName] = useState('');
@@ -9,8 +12,33 @@ function Register() {
     const [role, setRole] = useState('');
     const [phone, setPhone] = useState('');
 
-    const handleRegister = () => {
-        console.log(name, role, email, password, phone);
+    const { isAuthorized, setIsAuthorized, user, setUser } = useContext(AppContext);
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                'http://127.0.0.1:3000/api/v1/user/register',
+                { name, email, phone, role, password },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            );
+
+            setIsAuthorized(true);
+            setUser(response.data.response);
+        } catch(err) {
+            setIsAuthorized(false);
+            console.log("error in registering : ", err);
+        }
+    }
+
+    if(isAuthorized) {
+        return <Navigate to={'/'} />
     }
 
     return (
