@@ -71,9 +71,7 @@ function JobDetails() {
                         user && user.role === "Employer" ? (
                             <></>
                         ) : (
-                            <Link 
-                                onClick={ isAuthorized? navigateTo(`/application/${job._id}`): navigateTo('/login') }
-                            >
+                            <Link to={`/application/${job._id}`}>
                                 <button className="mt-4 font-bold w-40 p-2 bg-cyan-400 shadow-md rounded-md">
                                     Apply Now
                                 </button>
