@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 
 function Header() {
-    const { isAuthorized, setIsAuthorized } = useContext(AppContext);
-
-    const user = {
-        role: "Employer"
-    }
+    const { isAuthorized, setIsAuthorized, user } = useContext(AppContext);
 
     return (
         <>
@@ -98,8 +94,11 @@ function Header() {
                                             </button>
                                         ) : <></>
                                     }
-
                                 </Link>
+
+                                <li>
+                                    <h3 className="text-white text-lg font-bold mt-2">{user ? user.email : ''}</h3>
+                                </li>
                             </ul>
                         </div>
                     </div>
