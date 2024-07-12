@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Input from "../utils/Input";
+import axios from "axios";
 
 function PostJob() {
     const [title, setTitle] = useState("");
@@ -8,15 +9,37 @@ function PostJob() {
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [location, setLocation] = useState("");
-    const [salaryFrom, setSalaryFrom] = useState("");
-    const [salaryTo, setSalaryTo] = useState("");
-    const [fixedSalary, setFixedSalary] = useState("");
+    const [salaryFrom, setSalaryFrom] = useState(0);
+    const [salaryTo, setSalaryTo] = useState(0);
+    const [fixedSalary, setFixedSalary] = useState(0);
     const [salaryType, setSalaryType] = useState("default");
+
+    const postJob = async (e)=>{
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                'http://127.0.0.1:3000/api/v1/job/create-a-job',
+                { title, description, category, country, city, location, fixedSalary, salaryFrom, salaryTo },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            );
+
+            console.log(response);
+        } catch(err) {
+            console.log("error posting this job : ", err);
+        }
+    }
+
     return (
         <>
         <h1 className="text-2xl font-bold text-center m-4 bg-sky-400 p-2 rounded-md">POST NEW JOB</h1>
             <div className="flex flex-1 flex-row p-6 justify-center items-center">
-                <form className="bg-slate-300 rounded-md p-2">
+                <form className="bg-slate-300 rounded-md p-2" onSubmit={postJob}>
                     <div>
                         <Input
                             type="text"

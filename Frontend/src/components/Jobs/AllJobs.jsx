@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function AllJobs() {
-    const [jobs, setJobs] = useState([{
-        _id: 1,
-        title: "Software Engineer",
-        category: "IT",
-        location: "Bangalore"
-    }, {
-        _id: 2,
-        title: "Content manager",
-        category: "Social Media",
-        location: "Delhi"
-    }, {
-        _id: 2,
-        title: "Content manager",
-        category: "Social Media",
-        location: "Delhi"
-    }, {
-        _id: 2,
-        title: "Content manager",
-        category: "Social Media",
-        location: "Delhi"
-    }]);
+    const [jobs, setJobs] = useState([]);
+
+    // load all jobs on startup
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const response = await axios.get(
+                    'http://127.0.0.1:3000/api/v1/job/get-all-jobs',
+                    {
+                        withCredentials: true
+                    }
+                );
+
+                setJobs(response.data.jobs);
+            } catch (err) {
+                console.log("error getting all jobs : ", err);
+            }
+        }
+
+        fetchJobs();
+    }, []);
 
     return (
         <div className="w-full h-40 p-4">

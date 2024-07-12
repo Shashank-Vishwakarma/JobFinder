@@ -3,17 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 
 function JobDetails() {
-    const [job, setJob] = useState({
-        _id: 1,
-        title: "Software Engineer",
-        category: "IT",
-        city: "Bangalore",
-        country: "India",
-        location: "Bangalore, India",
-        description: "This is a software engineering job.",
-        jobPostedOn: "7 july 2024",
-        fixedSalary: 20000
-    });
+    const [job, setJob] = useState({});
     const { isAuthorized, user } = useContext(AppContext);
     const navigateTo = useNavigate();
 
@@ -60,7 +50,7 @@ function JobDetails() {
                             <></>
                         ) : (
                             <Link 
-                                onClick={ isAuthorized? navigateTo(`/application/${job._id}`): navigateTo('/register') }
+                                onClick={ isAuthorized? navigateTo(`/application/${job._id}`): navigateTo('/login') }
                             >
                                 <button className="mt-4 font-bold w-40 p-2 bg-cyan-400 shadow-md rounded-md">
                                     Apply Now
