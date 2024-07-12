@@ -5,7 +5,7 @@ const jwtAuthMiddleware = async (req, res, next) => {
     // extract the token from cookies
     const {token} = req.cookies;
     if(!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized, token not found' });
     }
 
     try {

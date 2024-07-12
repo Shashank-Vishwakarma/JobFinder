@@ -13,7 +13,7 @@ require('dotenv').config({ path: './config/.env' });
 
 // cors setup for establishing connection b/w frontend and backend
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true
 }));

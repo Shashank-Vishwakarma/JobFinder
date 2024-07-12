@@ -34,7 +34,7 @@ router.post('/register', async (req, res)=>{
             ),
             httpOnly: true, // Set httpOnly to true
         };
-        res.status(200).cookie('token', token, cookieOptions).json({
+        res.status(200).cookie('jwt_token', token, cookieOptions).json({
             message: "User registered successfully",
             response: response,
             token: token
@@ -79,8 +79,9 @@ router.post('/login', async (req, res)=>{
             httpOnly: true, // Set httpOnly to true
             sameSite: 'None'
         };
-        res.status(200).cookie('token', token, cookieOptions).json({
+        res.status(200).cookie('jwt_token', token, cookieOptions).json({
             message: "User logged in successfully!",
+            response: user,
             token: token
         });
     } catch(err) {
@@ -95,7 +96,7 @@ router.get('/logout', jwtAuthMiddleware, (req, res)=>{
         ),
         httpOnly: true, // Set httpOnly to true
     };
-    res.clearCookie('token', cookieOptions);
+    res.clearCookie('jwt_token', cookieOptions);
     res.status(200).json({
         message: "User logged out successfully!"
     });
