@@ -1,11 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 function JobDetails() {
     const [job, setJob] = useState({});
     const { isAuthorized, user } = useContext(AppContext);
     const navigateTo = useNavigate();
+
+    const { id } = useParams();
+
+    useEffect(()=>{
+        const getJobDetail = async ()=>{
+            try {
+                const response = await axios.get(
+                    `http://127.0.0.1:3000/api/v1/job/${id}`,
+                    {
+                        withCredentials: true
+                    }
+                );
+
+                setJob(response.data.job);
+            } catch(err) {
+                console.log("error getting the job : ", err);
+            }
+        }
+
+        getJobDetail();
+    }, []);
 
     return (
         <section className="p-4 text-left m-2">
