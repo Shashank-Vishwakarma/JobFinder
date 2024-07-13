@@ -1,49 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
+import axios from "axios";
 
 function MyApplications() {
-    const { isAuthorized, user } = useContext(AppContext);
-    const [applications, setApplications] = useState([
-        {
-            _id: 1,
-            name: "Shashank Vishwakarma",
-            email: "shashank@gmail.com",
-            phone: 1234567,
-            coverLetter: "This is cover letter",
-            address: "bangalore, India",
-            resume: {
-                url: "image.png"
-            }
-        },
-        {
-            _id: 2,
-            name: "Yash Mishra",
-            email: "yash@gmail.com",
-            phone: 1234567,
-            coverLetter: "This is cover letter",
-            address: "bangalore, India",
-            resume: {
-                url: "image.png"
-            }
-        },
-        {
-            _id: 3,
-            name: "Prasoon Pathak",
-            email: "prasoon@gmail.com",
-            phone: 1234567,
-            coverLetter: "This is cover letter",
-            address: "bangalore, India",
-            resume: {
-                url: "image.png"
-            }
-        }
-    ]);
+    const { user } = useContext(AppContext);
+    const [applications, setApplications] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [resumeImageUrl, setResumeImageUrl] = useState("");
-    const navigateTo = useNavigate();
+
+    useEffect(() => {
+        const getApplications = async () => {
+            try {
+                let response = {};
+                if (user && user.role === "Job Seeker") {
+                    response = await axios.get(
+                        'http://127.0.0.1:3000/api/v1/application/my-applications',
+                        { withCredentials: true }
+                    );
+                } else if (user && user.role === "Employer") {
+                    response = await axios.get(
+                        'http://127.0.0.1:3000/api/v1/application/employer/all',
+                        { withCredentials: true }
+                    );
+                }
+
+                setApplications(response.data.Applications);
+            } catch (err) {
+                console.log("error in getting the applications : ", err);
+            }
+        }
+
+        getApplications();
+    }, []);
 
     const deleteApplication = () => {
 
