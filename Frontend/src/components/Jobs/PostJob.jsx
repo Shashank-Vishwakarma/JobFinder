@@ -29,7 +29,16 @@ function PostJob() {
                 }
             );
 
-            console.log(response);
+            setTitle("");
+            setCategory("");
+            setCity("");
+            setCountry("");
+            setDescription("");
+            setFixedSalary("");
+            setSalaryTo("");
+            setSalaryFrom("");
+            setLocation("");
+            setSalaryType("default");
         } catch(err) {
             console.log("error posting this job : ", err);
         }
@@ -146,7 +155,7 @@ function PostJob() {
                         placeholder="Job Description"
                         className="p-2 m-1 border-2 border-solid border-cyan-700 outline-none text-black rounded-md block"
                     />
-                    <button type="submit" className="w-40 h-10 bg-sky-500 rounded-md shadow-md font-bold text-white mt-4">
+                    <button type="submit" className="w-40 h-10 bg-sky-500 rounded-md shadow-md font-bold mt-4">
                         Post Job
                     </button>
                 </form>

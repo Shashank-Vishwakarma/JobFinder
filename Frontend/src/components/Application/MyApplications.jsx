@@ -36,8 +36,15 @@ function MyApplications() {
         getApplications();
     }, []);
 
-    const deleteApplication = () => {
-
+    const deleteApplication = (id) => {
+        axios.delete(
+            `http://127.0.0.1:3000/api/v1/application/delete/${id}`,
+            { withCredentials: true }
+        ).then(()=>{
+            setApplications((prevApplications)=> prevApplications.filter((application)=> application._id !== id));
+        }).catch((err)=>{
+            console.log("error in deleting the application : ", err);
+        });
     }
 
     const openModal = (imageUrl) => {
@@ -123,7 +130,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
                             <span><b>Address: </b></span> {element.address}
                         </p>
                         <p>
-                            <span><b>CoverLetter: </b></span> {element.coverLetter}
+                            <span><b>CoverLetter: </b></span> {element.coverletter}
                         </p>
                         <div className="p-2 bg-red-500 rounded-md font-bold text-white mt-2">
                             <button onClick={() => deleteApplication(element._id)}>
@@ -162,7 +169,7 @@ const EmployerCard = ({ element, openModal }) => {
                         <span><b>Address: </b></span> {element.address}
                     </p>
                     <p>
-                        <span><b>CoverLetter: </b></span> {element.coverLetter}
+                        <span><b>CoverLetter: </b></span> {element.coverletter}
                     </p>
                 </div>
                 <div className="w-24">
