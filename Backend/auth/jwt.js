@@ -3,8 +3,7 @@ const User = require('../models/user');
 
 const jwtAuthMiddleware = async (req, res, next) => {
     // extract the token from cookies
-    console.log(req.cookies);
-    const {jwt_token} = req.cookies;
+    const { jwt_token } = req.cookies;
     if(!jwt_token) {
         return res.status(401).json({ error: 'Unauthorized, token not found' });
     }
