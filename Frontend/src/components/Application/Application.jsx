@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useState } from "react";
 import Input from "../utils/Input";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -12,10 +11,11 @@ function Application() {
     const [phone, setPhone] = useState(0);
     const [address, setAddress] = useState("");
     const [resume, setResume] = useState(null);
+    const [message, setMessage] = useState("");
 
     const { id } = useParams();
 
-    const applyForJob = async (e)=>{
+    const applyForJob = async (e) => {
         e.preventDefault();
 
         // create form data
@@ -27,23 +27,33 @@ function Application() {
         data.append("address", address);
         data.append("resume", resume);
         data.append("jobId", id);
-        
-        try {
-            const response = await axios.post(
-                'http://127.0.0.1:3000/api/v1/application/apply',
-                data,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    withCredentials: true
-                }
-            );
 
-            console.log(response);
-        } catch(err) {
+        setMessage("Please wait while we process your application...");
+
+        axios.post(
+            'http://127.0.0.1:3000/api/v1/application/apply',
+            data,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                withCredentials: true
+            }
+        ).then(() => {
+            setName("");
+            setEmail("");
+            setPhone("");
+            setAddress("");
+            setCoverLetter("");
+            setResume("");
+            setMessage("Application submitted successfully!");
+
+            setTimeout(()=>{
+                setMessage("");
+            }, 1000);
+        }).catch((err) => {
             console.log("error in applying for job : ", err);
-        }
+        });
     }
 
     const handleFileChange = (e) => {
@@ -53,6 +63,7 @@ function Application() {
     return (
         <>
             <h1 className="text-2xl font-bold text-center m-4 bg-sky-400 p-2 rounded-md">Application Form</h1>
+            <h3 className="text-lg text-center mt-2 font-semibold">{message}</h3>
             <section className="flex items-center justify-center m-4 p-2 rounded-md">
                 <div className="bg-slate-300 shadow-md rounded-md p-4">
                     <form className="grid grid-cols-2 gap-3" onSubmit={applyForJob}>
