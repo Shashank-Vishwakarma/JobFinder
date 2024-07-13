@@ -16,3 +16,9 @@ npm run dev
 ```
 
 # Frontend
+1. Move to the frontend folder where package.json is located.
+3. Run following commands:
+```
+npm i
+npm run dev
+```
