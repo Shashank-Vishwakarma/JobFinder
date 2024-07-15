@@ -31,13 +31,13 @@ function Register() {
 
             setIsAuthorized(true);
             setUser(response.data.response);
-        } catch(err) {
+        } catch (err) {
             setIsAuthorized(false);
             console.log("error in registering : ", err);
         }
     }
 
-    if(isAuthorized) {
+    if (isAuthorized) {
         return <Navigate to={'/'} />
     }
 
@@ -159,10 +159,7 @@ function Register() {
                                             We are more than just a company
                                         </h4>
                                         <p className="text-sm">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            Welcome to <b>JobFinder</b>, your one-stop destination for finding your perfect job! Whether you’re a recent graduate looking to kickstart your career, a seasoned professional seeking new challenges, or someone exploring a career change, JobFinder connects you with thousands of opportunities across various industries. Our intuitive platform not only helps you find jobs that match your skills and interests but also provides resources to enhance your resume, prepare for interviews, and stay updated with the latest job market trends. Join our community today and take the next step towards your dream job!
                                         </p>
                                     </div>
                                 </div>

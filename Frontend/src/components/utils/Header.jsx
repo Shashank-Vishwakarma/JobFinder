@@ -32,7 +32,7 @@ function Header() {
                         {/* Logo */}
                         <Link to={'/'} className="flex items-center">
                             <img width="64" height="64" src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-Job-Search-recruitment-nawicon-outline-color-nawicon.png" alt="Job Finder" />
-                            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Job Finder</span>
+                            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">JobFinder</span>
                         </Link>
                         <div className="flex items-center lg:order-2">
                             {
