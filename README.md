@@ -1,4 +1,5 @@
 # This is a job portal web app.
+The JobFinder App is a user-friendly platform designed to help recruiters post jobs and lets job seekers apply for job opportunities
 
 ## Screenshots
 #### Home Page
